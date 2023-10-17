@@ -5,7 +5,7 @@
 
 	const links = [
 		{
-			label: "Profile",
+			label: user.value?.user_metadata.full_name + "'s Profile",
 			avatar: {
 				src: user.value?.user_metadata.picture,
 			},
