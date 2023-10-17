@@ -9,6 +9,7 @@
 			avatar: {
 				src: user.value?.user_metadata.picture,
 			},
+			to: "/dashboard/profile",
 			badge: 100,
 		},
 		{
@@ -18,13 +19,13 @@
 		},
 		{
 			label: "Events",
-			icon: "i-heroicons-command-line",
+			icon: "i-heroicons-calendar",
 			to: "/dashboard/events",
 		},
 		{
-			label: "Trades",
-			icon: "i-heroicons-chart-bar",
-			to: "/dashboard/trades",
+			label: "Teams",
+			icon: "i-heroicons-user-group",
+			to: "/dashboard/teams",
 		},
 	];
 </script>
