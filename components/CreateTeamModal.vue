@@ -29,12 +29,22 @@
 		console.log(event.data);
 	}
 
-	const search = async (q) => {
-		const users = await $fetch("https://jsonplaceholder.typicode.com/users", {
+	type user = {
+		id: string;
+		fullName: string;
+		avatar: string;
+	};
+
+	const search = async (q: any) => {
+		const users = await $fetch<user[]>("/api/fetchUserList", {
 			params: { q },
 		});
 		return users
-			.map((user) => ({ id: user.id, label: user.name, suffix: user.email }))
+			.map((user: user) => ({
+				id: user.id,
+				label: user.fullName,
+				suffix: user.avatar,
+			}))
 			.filter(Boolean);
 	};
 	const selected = ref([]);
