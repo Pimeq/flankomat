@@ -18,8 +18,8 @@ jobs:
           node-version: "18"
 
       # Pick your own package manager and build script
-      - run: npm install
-      - run: npm run build
+      - run: yarn install
+      - run: yarn run build
         env:
           NITRO_PRESET: github_pages
 
