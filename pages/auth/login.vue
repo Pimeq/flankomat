@@ -9,7 +9,7 @@
 		await supabase.auth.signInWithOAuth({
 			provider: "discord",
 			options: {
-				redirectTo: "http://flankomat.pimeq.systems/auth/confirm",
+				redirectTo: "https://flankomat.pimeq.systems/auth/confirm",
 			},
 		});
 	};
