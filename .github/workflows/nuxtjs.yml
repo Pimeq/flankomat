@@ -36,6 +36,7 @@ jobs:
       - name: Build Project
         run: yarn run build
   deploy:
+    needs: build
     runs-on: self-hosted
     steps:
       - name: Run Server
