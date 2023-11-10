@@ -37,6 +37,10 @@ jobs:
   deploy:
     needs: build
     runs-on: self-hosted
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
     steps:
       - name: Run Server
-        run: pm2 start
+        run:  pm2 restart node
