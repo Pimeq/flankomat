@@ -1,9 +1,8 @@
 <script setup lang="ts">
-	import { ref } from "vue";
 	import type { FormError, FormSubmitEvent } from "@nuxt/ui/dist/runtime/types";
 
 	const isOpen = ref(false);
-
+	const user = useSupabaseUser();
 	defineShortcuts({
 		escape: {
 			usingInput: true,
@@ -14,8 +13,9 @@
 		},
 	});
 	const state = ref({
-		email: undefined,
-		password: undefined,
+		teamCaptain: user.value?.id,
+		teamName: user.value?.user_metadata?.full_name + "'s Team",
+		teamMembers: [],
 	});
 
 	const validate = (state: any): FormError[] => {
@@ -96,6 +96,7 @@
 								class="py-2"
 							>
 								<UInput
+									v-model="state.teamName"
 									placeholder="funky name"
 									icon="i-heroicons-user-group"
 								/>
@@ -108,6 +109,7 @@
 								class="py-2"
 							>
 								<UInput
+									v-model="state.teamCaptain"
 									disabled
 									placeholder="that'd be you dummy :3"
 									icon="i-heroicons-user-group"
