@@ -47,4 +47,4 @@ jobs:
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
     steps:
       - name: Run Server
-        run:  pm2 restart node
+        run:  pm2 restart node --update-env -- DATABASE_URL=${{ secrets.DATABASE_URL }} SUPABASE_KEY=${{ secrets.SUPABASE_KEY }} SUPABASE_URL=${{ secrets.SUPABASE_URL }}
