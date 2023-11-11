@@ -46,5 +46,9 @@ jobs:
       SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
     steps:
-      - name: Run Server
-        run:  pm2 restart node --update-env -- DATABASE_URL=${{ secrets.DATABASE_URL }} SUPABASE_KEY=${{ secrets.SUPABASE_KEY }} SUPABASE_URL=${{ secrets.SUPABASE_URL }}
+        - name: Restart Server
+          run: pm2 restart Nuxt || echo "Instance does not exit...starting"
+          continue-on-error: true
+        - name: Handle Error
+          if: failure()
+          run: pm2 start ecosystem.config.cjs
