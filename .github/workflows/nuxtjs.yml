@@ -42,12 +42,5 @@ jobs:
       SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
     steps:
-      - name: Remove existing .env file
-        run: rm -f .env
-      - name: Setup .env
-        run: |
-          echo "DATABASE_URL=$DATABASE_URL" >> .env
-          echo "SUPABASE_KEY=$SUPABASE_KEY" >> .env
-          echo "SUPABASE_URL=$SUPABASE_URL" >> .env
       - name: Run Server
-        run:  pm2 restart node
+        run:  pm2 restart node --env SUPABASE_URL=${{ secrets.DATABASE_URL }} --env DATABASE_URL=${{ secrets.DATABASE_URL }} --env SUPABASE_URL=${{ secrets.SUPABASE_URL }}
