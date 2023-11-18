@@ -36,6 +36,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache --check-cache
+      - name: Generate Prisma
+        run: yarn prisma generate
       - name: Build Project
         run: yarn run build
   deploy:
