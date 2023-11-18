@@ -33,6 +33,6 @@ export default defineEventHandler(async (event) => {
 		});
 		return mappedData;
 	} catch (error) {
-		return { status: 400, body: "unathenticated" };
+		return { status: 400, body: error };
 	}
 });
