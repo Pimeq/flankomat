@@ -8,9 +8,9 @@ type tmappedData = {
 	avatar: string;
 };
 
-const mappedData: tmappedData[] = [];
-
 export default defineEventHandler(async (event) => {
+	const mappedData: tmappedData[] = [];
+	const query = getQuery(event);
 	try {
 		const activeUser = await serverSupabaseUser(event);
 		const data = await prisma.users.findMany({
@@ -24,6 +24,7 @@ export default defineEventHandler(async (event) => {
 				},
 			},
 		});
+
 		data.forEach((element: any) => {
 			mappedData.push({
 				id: element.id,
@@ -31,7 +32,17 @@ export default defineEventHandler(async (event) => {
 				avatar: element.raw_user_meta_data?.avatar_url,
 			});
 		});
-		return mappedData;
+		if (!query?.q) {
+			return mappedData;
+		} else {
+			const filteredData = mappedData.filter((element) => {
+				return element.fullName
+					?.toLowerCase()
+					.includes((query.q as string).toLowerCase());
+			});
+
+			return filteredData;
+		}
 	} catch (error) {
 		return { status: 400, body: error };
 	}
