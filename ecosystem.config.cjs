@@ -5,7 +5,7 @@ module.exports = {
       port: '3000',
       exec_mode: 'cluster',
       instances: 'max',
-      script: './.output/server/index.mjs'
+      script: 'DATABASE_URL=$DATABASE_URL SUPABASE_KEY=$SUPABASE_KEY SUPABASE_URL=$SUPABASE_URL ./.output/server/index.mjs',
     }
   ]
 }
