@@ -48,9 +48,9 @@ jobs:
       SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
     steps:
-        - name: Restart Server
-          run: pm2 restart Nuxt || echo "Instance does not exit...starting"
-          continue-on-error: true
-        - name: Handle Error
-          if: failure()
-          run: pm2 start ecosystem.config.cjs
+      - name: Restart Server
+        run: pm2 restart Nuxt || echo "Instance does not exist...starting"
+        continue-on-error: true
+      - name: Handle Error
+        if: ${{ failure() && !cancelled() }}
+        run: pm2 start ecosystem.config.cjs
