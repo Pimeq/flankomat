@@ -2,7 +2,9 @@
     
 </setup>
 <template>
-	<div class="bg-gray-800">
+	<div
+		class="bg-gray-800 bg-gradient-to-r from-green-400/5 via-slate-800 to-green-400/5"
+	>
 		<!-- Hero -->
 		<div class="hero p-10">
 			<div class="container mx-auto text-center">

@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.6.0",
+    "nuxt-icon": "^0.6.6",
     "prisma": "^5.6.0"
   }
 }
