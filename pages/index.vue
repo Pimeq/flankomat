@@ -18,17 +18,17 @@
 							<span class="font-bold">Flankomat</span>
 						</div>
 						<NuxtLink
-							href="#"
+							to="#about"
 							class="py-4 px-2 text-green-400 hover:text-green-700 transition-all ease-in-out duration-3 border-b-2 border-green-400"
 							>About</NuxtLink
 						>
 						<NuxtLink
-							href="#"
+							to="#pricing"
 							class="py-4 px-2 text-green-400 hover:text-green-700 transition-all ease-in-out duration-3 border-b-2 border-green-400"
 							>Pricing</NuxtLink
 						>
 						<NuxtLink
-							href="#"
+							to="#contactUs"
 							class="py-4 px-2 text-green-400 hover:text-green-700 transition-all ease-in-out duration-3 border-b-2 border-green-400"
 							>Contact Us</NuxtLink
 						>
@@ -40,8 +40,8 @@
 			</div>
 		</div>
 		<LandingHero />
-		<LandingAboutUs />
-		<LandingPricing />
+		<LandingAboutUs id="aboutUs" />
+		<LandingPricing id="pricing" />
 
 		<div class="footer">
 			<div class="container mx-auto px-6 pt-10 pb-6">
@@ -49,7 +49,9 @@
 					<div class="w-full md:w-1/4 text-center md:text-left">
 						<h5 class="uppercase mb-6 font-bold">Links</h5>
 						<ul class="mb-4 flex space-x-3">
-							<li class="mt-2">
+							<li
+								class="hover:scale-125 hover:-translate-y-3 transition-all ease-in-out"
+							>
 								<NuxtLink
 									href="#"
 									class="hover:underline text-gray-200 hover:text-orange-500 transition-all ease-in-out duration-3"
@@ -57,15 +59,19 @@
 									<Icon name="uil:github" color="white" class="text-5xl" />
 								</NuxtLink>
 							</li>
-							<li class="mt-2">
+							<li
+								class="hover:scale-125 hover:-translate-y-3 transition-all ease-in-out"
+							>
 								<NuxtLink
 									href="#"
-									class="hover:underline text-gray-200 hover:text-green-400 transition-all ease-in-out duration-3"
+									class="text-gray-200 hover:text-green-400 transition-all ease-in-out duration-3"
 								>
 									<Icon name="uil:discord" color="white" class="text-5xl" />
 								</NuxtLink>
 							</li>
-							<li class="mt-2">
+							<li
+								class="hover:scale-125 hover:-translate-y-3 transition-all ease-in-out"
+							>
 								<NuxtLink
 									href="#"
 									class="hover:underline text-gray-200 hover:text-green-400 transition-all ease-in-out duration-3"

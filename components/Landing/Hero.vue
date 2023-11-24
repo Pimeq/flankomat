@@ -14,12 +14,11 @@
 				<p class="text-xl text-gray-300 mb-6">
 					Get wasted together with your friends!
 				</p>
-				<button
-					href="#"
-					class="transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300 bg-green-400 hover:bg-emerald-400 text-gray-700 font-bold py-2 px-4 rounded-md"
+				<div
+					class="transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300 bg-green-400 hover:bg-emerald-400 text-gray-700 font-bold py-2 px-4 rounded-md max-w-fit mx-auto"
 				>
-					Get Started
-				</button>
+					<NuxtLink href="/auth/login"> Get Started </NuxtLink>
+				</div>
 			</div>
 		</div>
 	</div>
