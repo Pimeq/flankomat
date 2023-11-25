@@ -1,10 +1,8 @@
 <template>
-	<div class="pricing mt-5 mb-4 bg-gray-800 font-mono">
-		<h1
-			class="text-4xl font-mono text-center p-4 my-3 bg-gradient-to-b from-green-500/25"
-		>
-			Pricing:
-		</h1>
+	<div
+		class="pricing mt-5 mb-4 bg-gray-800 font-mono bg-gradient-to-b from-green-500/20 pb-32 pt-10"
+	>
+		<h1 class="text-4xl font-mono text-center p-4 my-3">Pricing:</h1>
 		<div class="grid grid-cols-3 p-2 space-x-2">
 			<UCard
 				:ui="{

@@ -3,7 +3,7 @@
 </setup>
 <template>
 	<div
-		class="bg-gray-800 bg-gradient-to-b from-green-400/5 via-slate-800/25 to-green-400/5"
+		class="bg-gray-800 bg-gradient-to-b from-green-400/5 via-slate-800/25 to-green-400/5 my-2 p-20"
 	>
 		<!-- Hero -->
 		<div class="hero p-10">
