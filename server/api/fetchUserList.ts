@@ -1,7 +1,7 @@
 import { serverSupabaseUser } from "#supabase/server";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient({
-  log: ['query', 'info', 'warn', 'error'],
+  log: ['error'],
 });
 
 type tmappedData = {
