@@ -24,7 +24,7 @@
 </script>
 
 <template>
-	<div v-if="teamsPending">loading...</div>
+	<div v-if="teamsPending">Loading...</div>
 	<div v-else>
 		<div v-if="!userTeams?.length">
 			<div class="w-1/2 m-auto pt-8">
