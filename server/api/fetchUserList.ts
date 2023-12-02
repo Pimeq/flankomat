@@ -1,6 +1,8 @@
 import { serverSupabaseUser } from "#supabase/server";
 import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({
+  log: ['query', 'info', 'warn', 'error'],
+});
 
 type tmappedData = {
 	id: string;
@@ -44,6 +46,7 @@ export default defineEventHandler(async (event) => {
 			return filteredData;
 		}
 	} catch (error) {
+		console.log(error)
 		return { status: 400, body: error };
 	}
 });
