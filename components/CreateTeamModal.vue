@@ -3,6 +3,9 @@
 
 	const isOpen = ref(false);
 	const user = useSupabaseUser();
+
+	const emit = defineEmits(["submit"]);
+
 	defineShortcuts({
 		escape: {
 			usingInput: true,
@@ -20,13 +23,27 @@
 
 	const validate = (state: any): FormError[] => {
 		const errors = [];
-		//if (!state.email) errors.push({ path: "email", message: "Required" });
-		if (!state.password) errors.push({ path: "password", message: "Required" });
+		if (!state.teamName) errors.push({ path: "teamName", message: "Required" });
+		if (!state.teamCaptain)
+			errors.push({ path: "teamName", message: "Required" });
+		if (state.teamMembers.length < 1)
+			errors.push({ path: "teamName", message: "Required" });
+
 		return errors;
 	};
+
+	const dataPending = ref(false);
 	async function submit(event: FormSubmitEvent<any>) {
 		// Do something with data
-		console.log(event.data);
+		dataPending.value = true;
+		const { data } = await useFetch("/api/createTeam", {
+			method: "POST",
+			body: JSON.stringify(event.data),
+		}).finally(() => {
+			dataPending.value = false;
+		});
+		emit("submit");
+		console.log(data);
 	}
 
 	type user = {
@@ -47,7 +64,6 @@
 			}))
 			.filter(Boolean);
 	};
-	const selected = ref([]);
 </script>
 <template>
 	<div>
@@ -87,7 +103,7 @@
 					</template>
 
 					<div>
-						<UForm :validate="validate" :state="state" @submit="submit">
+						<UForm :state="state" :validate="validate" @submit="submit">
 							<UFormGroup
 								size="lg"
 								label="Team Name"
@@ -117,7 +133,7 @@
 							</UFormGroup>
 							<UFormGroup label="Members" name="teamMembers" class="py-2">
 								<USelectMenu
-									v-model="selected"
+									v-model="state.teamMembers"
 									:searchable="search"
 									placeholder="Search for a user..."
 									multiple
@@ -131,6 +147,7 @@
 									size="lg"
 									label="Create Team"
 									type="submit"
+									:loading="dataPending"
 								/>
 							</div>
 						</UForm>

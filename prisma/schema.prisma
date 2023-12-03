@@ -1,14 +1,13 @@
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["multiSchema"]
-  binaryTargets = ["native","debian-openssl-1.1.x"]
+  binaryTargets   = ["native", "debian-openssl-1.1.x"]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
   schemas  = ["auth", "public"]
-
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -192,6 +191,9 @@ model sessions {
   factor_id      String?          @db.Uuid
   aal            aal_level?
   not_after      DateTime?        @db.Timestamptz(6)
+  refreshed_at   DateTime?        @db.Timestamp(6)
+  user_agent     String?
+  ip             String?          @db.Inet
   mfa_amr_claims mfa_amr_claims[]
   refresh_tokens refresh_tokens[]
   users          users            @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
@@ -281,13 +283,13 @@ model users {
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model Teams {
-  id          BigInt  @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   teamName    String?
   teamCaptain String? @db.Uuid
   members     Json?   @db.Json
   image       String?
-  wins        BigInt?
-  losses      BigInt?
+  wins        Int?    @db.SmallInt
+  losses      Int?    @db.SmallInt
 
   @@schema("public")
 }
