@@ -10,7 +10,7 @@ export interface memberData {
 
 type IBody = {
 	teamName: string;
-	teamCaptain: string;
+	teamCaptain: memberData[];
 	teamMembers: memberData[];
 	image: string;
 };
@@ -19,7 +19,9 @@ export default defineEventHandler(async (event) => {
 	try {
 		const user = serverSupabaseUser(event);
 		const body = await readBody(event);
-		console.log(body);
+		if (!body) {
+			return { status: 200, body: "" };
+		}
 
 		const team = await prisma.teams.create({
 			data: {

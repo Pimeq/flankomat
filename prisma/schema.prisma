@@ -285,11 +285,11 @@ model users {
 model Teams {
   id          Int     @id @default(autoincrement())
   teamName    String?
-  teamCaptain String? @db.Uuid
-  members     Json?   @db.Json
+  members     Json?
   image       String?
   wins        Int?    @db.SmallInt
   losses      Int?    @db.SmallInt
+  teamCaptain Json?
 
   @@schema("public")
 }

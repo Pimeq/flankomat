@@ -15,8 +15,16 @@
 			},
 		},
 	});
+
+	const { data: curUser, pending: userPending } = await useFetch(
+		"/api/createTeam",
+		{
+			method: "POST",
+		}
+	);
+
 	const state = ref({
-		teamCaptain: user.value?.id,
+		teamCaptain: [curUser.value],
 		teamName: user.value?.user_metadata?.full_name + "'s Team",
 		teamMembers: [],
 	});
@@ -43,7 +51,6 @@
 			dataPending.value = false;
 		});
 		emit("submit");
-		console.log(data);
 	}
 
 	type user = {
@@ -124,9 +131,10 @@
 								name="teamCaptain"
 								class="py-2"
 							>
-								<UInput
+								<USelectMenu
 									v-model="state.teamCaptain"
-									disabled
+									:searchable="search"
+									by="id"
 									placeholder="that'd be you dummy :3"
 									icon="i-heroicons-user-group"
 								/>
