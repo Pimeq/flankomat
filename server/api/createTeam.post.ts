@@ -33,6 +33,7 @@ export default defineEventHandler(async (event) => {
 				losses: 0,
 			},
 		});
+		console.log(team);
 		return { status: 200, body: team };
 	} catch (error) {
 		console.log(error);

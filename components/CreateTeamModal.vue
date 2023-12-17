@@ -17,14 +17,19 @@
 	});
 
 	const { data: curUser, pending: userPending } = await useFetch(
-		"/api/createTeam",
+		"/api/fetchCurUser",
 		{
 			method: "POST",
 		}
 	);
 
+	const teamCaptain = {
+		id: (curUser.value as user[])[0]?.id || null,
+		label: (curUser.value as user[])[0]?.fullName || null,
+		suffix: (curUser.value as user[])[0]?.avatar || null,
+	};
 	const state = ref({
-		teamCaptain: [curUser.value],
+		teamCaptain: teamCaptain,
 		teamName: user.value?.user_metadata?.full_name + "'s Team",
 		teamMembers: [],
 	});
@@ -133,8 +138,8 @@
 							>
 								<USelectMenu
 									v-model="state.teamCaptain"
-									:searchable="search"
 									by="id"
+									disabled
 									placeholder="that'd be you dummy :3"
 									icon="i-heroicons-user-group"
 								/>

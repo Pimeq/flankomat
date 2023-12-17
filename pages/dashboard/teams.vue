@@ -17,20 +17,19 @@
 	};
 
 	const user = useSupabaseUser();
-	const { data: userTeams, pending: teamsPending } = await useFetch<ITeam[]>(
-		"/api/fetchUserTeams",
-		{
-			params: { id: user.value?.id },
-		}
-	);
-
-	console.log(userTeams.value);
+	const {
+		data: userTeams,
+		pending: teamsPending,
+		refresh: teamsRefresh,
+	} = await useFetch<ITeam[]>("/api/fetchUserTeams", {
+		params: { id: user.value?.id },
+	});
 </script>
 
 <template>
 	<div>
 		<div class="w-2/3 m-auto px-6">
-			<CreateTeamModal />
+			<CreateTeamModal @submit="teamsRefresh()" />
 		</div>
 		<div v-for="team in userTeams" class="grid grid-cols-2 gap-5 m-3">
 			<UCard>
