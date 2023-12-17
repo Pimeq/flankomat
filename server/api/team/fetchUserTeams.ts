@@ -6,7 +6,6 @@ export default defineEventHandler(async (event) => {
 	try {
 		const query = getQuery(event);
 		const activeUser = await serverSupabaseUser(event);
-		console.log(activeUser?.id);
 		return await prisma.teams.findMany({
 			where: {
 				teamCaptain: {

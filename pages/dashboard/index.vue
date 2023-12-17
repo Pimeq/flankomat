@@ -16,7 +16,7 @@
 	});
 	const user = useSupabaseUser();
 	const { pending: teamsPending, data: userTeams } = useLazyFetch<ITeams>(
-		"/api/fetchUserTeams"
+		"/api/team/fetchUserTeams"
 	);
 	watch(userTeams, (newTeams) => {
 		userTeams.value = newTeams;

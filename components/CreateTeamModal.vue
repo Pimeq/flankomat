@@ -17,7 +17,7 @@
 	});
 
 	const { data: curUser, pending: userPending } = await useFetch(
-		"/api/fetchCurUser",
+		"/api/user/fetchCurUser",
 		{
 			method: "POST",
 		}
@@ -49,11 +49,12 @@
 	async function submit(event: FormSubmitEvent<any>) {
 		// Do something with data
 		dataPending.value = true;
-		const { data } = await useFetch("/api/createTeam", {
+		const { data } = await useFetch("/api/team/createTeam", {
 			method: "POST",
 			body: JSON.stringify(event.data),
 		}).finally(() => {
 			dataPending.value = false;
+			isOpen.value = false;
 		});
 		emit("submit");
 	}
@@ -65,7 +66,7 @@
 	};
 
 	const search = async (q: any) => {
-		const users = await $fetch<user[]>("/api/fetchUserList", {
+		const users = await $fetch<user[]>("/api/user/fetchUserList", {
 			params: { q },
 		});
 		return users
