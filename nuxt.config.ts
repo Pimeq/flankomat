@@ -6,6 +6,7 @@ export default defineNuxtConfig({
 		"@nuxtjs/supabase",
 		"nuxt-icon",
 		"@hypernym/nuxt-anime",
+		"@samk-dev/nuxt-vcalendar",
 	],
 	supabase: {
 		url: process.env.SUPABASE_URL,
