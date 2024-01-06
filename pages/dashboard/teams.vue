@@ -1,40 +1,21 @@
 <script setup lang="ts">
+	import type { ITeam } from "@/types/team";
+
 	definePageMeta({
 		layout: "dashboard",
 	});
-
-	export interface memberData {
-		id: string;
-		label: string;
-		suffix: string;
-	}
-
-	type ITeamCaptain = {
-		id: string;
-		label: string;
-		suffix: string;
-	};
-
-	type ITeam = {
-		id: string;
-		teamName: string;
-		teamCaptain: ITeamCaptain;
-		members: memberData[];
-		image: string;
-	};
 
 	const user = useSupabaseUser();
 	const {
 		data: userTeams,
 		pending: teamsPending,
 		refresh: teamsRefresh,
-	} = await useFetch<ITeam[]>("/api/team/fetchUserTeams", {
-		params: { id: user.value?.id },
-	});
+	} = await useFetch<ITeam[]>("/api/team/fetchUserTeams");
 
 	const delTeamModal = ref(false);
 	const markedTeam = ref();
 	const toast = useToast();
+	console.log(userTeams.value);
 </script>
 
 <template>
@@ -93,6 +74,7 @@
 		<div class="w-2/3 m-auto px-6">
 			<CreateTeamModal @submit="teamsRefresh()" />
 		</div>
+
 		<div v-for="team in userTeams" class="grid grid-cols-2 gap-5 m-3">
 			<UCard>
 				<div class="flex float-right">
@@ -137,6 +119,15 @@
 							<UAvatar :alt="member.label" size="sm" :src="member.suffix" />
 							<h1 class="text-2xl font-mono">{{ member.label }}</h1>
 						</div>
+					</div>
+
+					<div>
+						<h1 class="text-2xl font-bold text-right">
+							Wins: <span class="text-green-400">{{ team.wins }}</span>
+						</h1>
+						<h1 class="text-2xl font-bold text-right">
+							Losses: <span class="text-red-400">{{ team.losses }}</span>
+						</h1>
 					</div>
 				</div>
 			</UCard>

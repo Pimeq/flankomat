@@ -7,9 +7,11 @@ export default defineEventHandler(async (event) => {
 		const activeUser = await serverSupabaseUser(event);
 		return await prisma.teams.findMany({
 			where: {
-				teamCaptain: {
-					path: ["id"],
-					equals: activeUser?.id,
+				NOT: {
+					teamCaptain: {
+						path: ["id"],
+						equals: activeUser?.id,
+					},
 				},
 			},
 		});

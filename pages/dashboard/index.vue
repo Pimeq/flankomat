@@ -1,15 +1,5 @@
 <script setup lang="ts">
-	type ITeams = [
-		{
-			id: number;
-			teamName: string | null;
-			teamCaptain: string | null;
-			members: [member: string | null];
-			image: string | null;
-			wins: number | null;
-			losses: number | null;
-		}
-	];
+	import type { ITeams, ITeam } from "@/types/team";
 
 	definePageMeta({
 		layout: "dashboard",
@@ -18,9 +8,35 @@
 	const { pending: teamsPending, data: userTeams } = useLazyFetch<ITeams>(
 		"/api/team/fetchUserTeams"
 	);
+	const { pending: otherTeamsPending, data: otherTeams } = useLazyFetch<ITeams>(
+		"/api/team/fetchOtherTeams"
+	);
 	watch(userTeams, (newTeams) => {
 		userTeams.value = newTeams;
 	});
+
+	const columns = [
+		{
+			label: "Team Name",
+			name: "Name",
+			key: "teamName",
+		},
+		{
+			label: "Team Members",
+			name: "Members",
+			key: "members",
+		},
+		{
+			label: "Team Wins",
+			name: "Wins",
+			key: "wins",
+		},
+		{
+			label: "Team Losses",
+			name: "Losses",
+			key: "losses",
+		},
+	];
 </script>
 
 <template>
@@ -44,6 +60,30 @@
 						label="Create a team"
 						@click="() => $router.push('/dashboard/teams')"
 					/>
+				</div>
+			</div>
+		</div>
+		<div v-else>
+			<div>
+				<div class="justify-items-start items-center pt-3">
+					<h1 class="text-3xl font-bold">Your teams</h1>
+					<UTable :rows="userTeams" :columns="columns">
+						<template #members-data="{ row }">
+							{{
+								(row as ITeam).members.map((member) => member.label).join(", ")
+							}}
+						</template>
+					</UTable>
+				</div>
+				<div class="justify-items-start items-center pt-3">
+					<h1 class="text-3xl font-bold">Other teams</h1>
+					<UTable :rows="otherTeams || []" :columns="columns">
+						<template #members-data="{ row }">
+							{{
+								(row as ITeam).members.map((member) => member.label).join(", ")
+							}}
+						</template>
+					</UTable>
 				</div>
 			</div>
 		</div>
