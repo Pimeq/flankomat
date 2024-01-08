@@ -4,28 +4,29 @@
 </script>
 
 <template>
-	<div class="h-screen">
+	<div class="flex h-full overflow-hidden">
 		<NuxtLoadingIndicator />
-		<div class="w-2/12 h-screen float-left flex flex-col">
-			<div class="flex flex-1 flex-col mb-auto">
+
+		<div class="flex flex-col h-full w-2/12 bg-gray-800 text-gray-200 relative">
+			<div class="fixed h-full">
 				<Drawer />
-			</div>
-			<div class="relative mx-2 mb-5">
-				<UButton
-					size="lg"
-					icon=" i-heroicons-lock-open"
-					@click="
-						() => {
-							client.auth.signOut();
-							router.push('/auth/login');
-						}
-					"
-				>
-					Log Out
-				</UButton>
+				<div class="absolute bottom-2 mx-auto text-center cursor-pointer">
+					<UButton
+						size="lg"
+						icon=" i-heroicons-lock-open"
+						@click="
+							() => {
+								client.auth.signOut();
+								router.push('/auth/login');
+							}
+						"
+					>
+						Log Out
+					</UButton>
+				</div>
 			</div>
 		</div>
 
-		<slot />
+		<slot class="flex-1 overflow-x-hidden overflow-y-auto p-4 ml-64" />
 	</div>
 </template>

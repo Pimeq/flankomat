@@ -1,15 +1,11 @@
 import { serverSupabaseUser } from "#supabase/server";
 import { PrismaClient } from "@prisma/client";
+import type { Iuser } from "@/types/user";
 const prisma = new PrismaClient();
 
-type tmappedData = {
-	id: string;
-	fullName: string;
-	avatar: string;
-};
 
 export default defineEventHandler(async (event) => {
-	const mappedData: tmappedData[] = [];
+	const mappedData: Iuser[] = [];
 	const query = getQuery(event);
 	try {
 		const activeUser = await serverSupabaseUser(event);
