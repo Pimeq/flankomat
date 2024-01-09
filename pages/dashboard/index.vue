@@ -41,7 +41,7 @@
 
 <template>
 	<div v-if="teamsPending">Loading...</div>
-	<div v-else>
+	<div v-else class="w-full">
 		<div v-if="!userTeams?.length">
 			<div class="w-1/2 m-auto pt-8">
 				<UAlert
@@ -63,28 +63,26 @@
 				</div>
 			</div>
 		</div>
-		<div v-else>
-			<div>
-				<div class="justify-items-center items-center pt-3">
-					<h1 class="text-3xl font-bold">Your teams</h1>
-					<UTable :rows="userTeams" :columns="columns" class="px-5">
-						<template #members-data="{ row }">
-							{{
-								(row as ITeam).members.map((member) => member.label).join(", ")
-							}}
-						</template>
-					</UTable>
-				</div>
-				<div class="justify-items-center items-center pt-3">
-					<h1 class="text-3xl font-bold">Other teams</h1>
-					<UTable :rows="otherTeams || []" :columns="columns" class="px-5">
-						<template #members-data="{ row }">
-							{{
-								(row as ITeam).members.map((member) => member.label).join(", ")
-							}}
-						</template>
-					</UTable>
-				</div>
+		<div v-else class="w-full">
+			<div class="pt-3">
+				<h1 class="text-3xl font-bold">Your teams</h1>
+				<UTable :rows="userTeams" :columns="columns" class="px-5">
+					<template #members-data="{ row }">
+						{{
+							(row as ITeam).members.map((member) => member.label).join(", ")
+						}}
+					</template>
+				</UTable>
+			</div>
+			<div class="">
+				<h1 class="text-3xl font-bold">Other teams</h1>
+				<UTable :rows="otherTeams || []" :columns="columns" class="px-5">
+					<template #members-data="{ row }">
+						{{
+							(row as ITeam).members.map((member) => member.label).join(", ")
+						}}
+					</template>
+				</UTable>
 			</div>
 		</div>
 	</div>

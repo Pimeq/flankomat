@@ -32,7 +32,7 @@
 	// - Add a button to view an event
 </script>
 <template>
-	<div>
+	<div class="w-full">
 		<h1 class="text-3xl font-bold">Events</h1>
 
 		{{ eventsData }}

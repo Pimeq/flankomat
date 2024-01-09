@@ -27,6 +27,6 @@
 			</div>
 		</div>
 
-		<slot class="flex-1 overflow-x-hidden overflow-y-auto p-4 ml-64" />
+		<slot class="flex overflow-x-hidden overflow-y-auto p-4 w-full" />
 	</div>
 </template>
